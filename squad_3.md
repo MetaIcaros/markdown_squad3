@@ -77,7 +77,7 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
   "unidade_id": 2,
   "data_consulta": "05-11-2026",
   "total": 1,
-  "dados": [
+  "dados":
     {
       "cliente": {
         "id": 2012,
@@ -109,8 +109,8 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
         "perfil": "Atendente"
       }
     }
-  ]
 }
+
 ### 🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de Serviço
 Permite ao **Atendente** alterar o status da Ordem de Serviço (`os_id`) para concluído ao finalizar o serviço na filial.
 
@@ -174,7 +174,7 @@ HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Ate
     "unidade_id": null,
     "periodo": "01-11-2026 a 05-11-2026"
   },
-  "dados": [
+  "dados": 
     {
       "cliente_id": 2012,
       "os_id": "089",
@@ -193,13 +193,15 @@ HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Ate
       "servico_id": 104,
       "preco_praticado": 150.00
     }
-  ]
+  
 }
-Tratamento de Erros RetornadosHTTP 400 Bad Request: Parâmetros de data enviados em formato inválido diferente de DD-MM-AAAA ou intervalo inconsistente (data_inicio posterior a data_fim).JSON{
+Tratamento de Erros RetornadosHTTP 400 Bad Request: Parâmetros de data enviados em formato inválido diferente de DD-MM-AAAA ou intervalo inconsistente (data_inicio posterior a data_fim).JSON
+{
   "sucesso": false,
   "erro": "Parâmetros de data inválidos. Utilize estritamente o formato DD-MM-AAAA."
 }
-HTTP 500 Internal Server Error: Falha crítica na consulta ou na consolidação dos dados junto ao banco de dados SQLite do Squad 3.JSON{
+HTTP 500 Internal Server Error: Falha crítica na consulta ou na consolidação dos dados junto ao banco de dados SQLite do Squad 3.JSON
+{
   "sucesso": false,
   "erro": "Erro interno ao consolidar a massa de Ordens de Serviço concluídas para exportação."
 }
