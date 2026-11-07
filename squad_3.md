@@ -144,6 +144,7 @@ Exemplo de Resposta de Sucesso (HTTP 200 OK)
     "os_id": "089",
     "status": "concluido",
     "unidade_id": 2,
+    "horario_inicio": "05-11-2026 14:30",
     "data_conclusao": "05-11-2026 15:30",
     "pet": {
       "id": 3045,
@@ -206,6 +207,7 @@ Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista
       "cliente_id": 2012,
       "os_id": "089",
       "unidade_id": 2,
+      "horario_inicio": "05-11-2026 14:30",
       "data_conclusao": "05-11-2026 15:30",
       "pet_id": 3045,
       "servico_id": 102,
@@ -215,6 +217,7 @@ Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista
       "cliente_id": 2018,
       "os_id": "090",
       "unidade_id": 1,
+      "horario_inicio": "05-11-2026 15:15",
       "data_conclusao": "05-11-2026 16:15",
       "pet_id": 3102,
       "servico_id": 104,
