@@ -111,6 +111,8 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
     }
 }
 
+---
+
 ### 🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de Serviço
 Permite ao **Atendente** alterar o status da Ordem de Serviço (`os_id`) para concluído ao finalizar o serviço na filial.
 
@@ -159,15 +161,24 @@ Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
     }
   }
 }
-Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.JSON{
+
+Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.JSON
+{
   "sucesso": false,
   "erro": "A OS nº 089 já se encontra concluída ou cancelada."
 }
-HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Atendente ou em filial incorreta).JSON{
+HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Atendente ou em filial incorreta).JSON
+{
   "sucesso": false,
   "erro": "Acesso negado: apenas atendentes da filial correspondente podem concluir Ordens de Serviço."
 }
-🔵 ROTA 3: Exportar Agendamentos Concluídos (Para Gestão/Relatórios)Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista consolidada de todas as Ordens de Serviço que atingiram o status concluido. Permite filtros opcionais por período de datas e filial para fins de fechamento de caixa, faturamento e controle de estoque de insumos.Método HTTP: GETEnd-point: /api/agendamentos/concluidosConsumidor: Squad 2 — Gestão e Relatórios (Guardiã: Beatriz / Bia)Parâmetros de Entrada (Query Parameters)CampoTipoObrigatório?Descrição / Valores Permitidosunidade_idIntegerNãoFiltra o relatório por uma filial específica (1, 2 ou 3). Se omitido, retorna os dados consolidados de todas as filiais.data_inicioString (DD-MM-AAAA)NãoData inicial do período de apuração financeira (Ex: 01-11-2026).data_fimString (DD-MM-AAAA)NãoData final do período de apuração financeira (Ex: 05-11-2026).Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
+
+---
+
+🔵 ROTA 3: Exportar Agendamentos Concluídos (Para Gestão/Relatórios)Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista consolidada de todas as Ordens de Serviço que atingiram o status concluido. Permite filtros opcionais por período de datas e filial para fins de fechamento de caixa, faturamento e controle de estoque de insumos.Método HTTP: GETEnd-point: /api/agendamentos/concluidosConsumidor: Squad 2 — Gestão e Relatórios (Guardiã: Beatriz / Bia)Parâmetros de Entrada (Query Parameters)CampoTipoObrigatório?Descrição / Valores Permitidosunidade_idIntegerNãoFiltra o relatório por uma filial específica (1, 2 ou 3). Se omitido, retorna os dados consolidados de todas as filiais.data_inicioString (DD-MM-AAAA)NãoData inicial do período de apuração financeira (Ex: 01-11-2026).data_fimString (DD-MM-AAAA)NãoData final do período de apuração financeira (Ex: 05-11-2026).
+
+Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
+{
   "sucesso": true,
   "total_registros": 2,
   "filtro_aplicado": {
