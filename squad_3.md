@@ -127,7 +127,7 @@ Permite ao **Atendente** alterar o status da Ordem de Serviço (`os_id`) para co
 | `:os_id` | String | **Sim** | ID da Ordem de Serviço iniciado por zero (Ex: `"089"`). |
 
 #### Corpo da Requisição (Payload JSON Body)
-```json
+
 {
   "status": "concluido",
   "observacoes": "Banho e tosa concluídos sem intercorrências no horário previsto."
