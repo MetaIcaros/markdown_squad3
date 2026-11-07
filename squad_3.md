@@ -111,11 +111,13 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
     }
   ]
 }
-🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de ServiçoPermite ao Atendente alterar o status da Ordem de Serviço (os_id) para concluído ao finalizar o serviço na filial.Método HTTP: PUT (ou PATCH)End-point: /api/agendamentos/:os_id/concluirConsumidor: Interface de Atendimento (Squad 3)Parâmetros de Rota (Path Parameters)ParâmetroTipoObrigatório?Descrição / Exemplo:os_idStringSimID da Ordem de Serviço iniciado por zero (Ex: "089").Corpo da Requisição (Payload JSON Body)JSON{
+🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de ServiçoPermite ao Atendente alterar o status da Ordem de Serviço (os_id) para concluído ao finalizar o serviço na filial.Método HTTP: PUT (ou PATCH)End-point: /api/agendamentos/:os_id/concluirConsumidor: Interface de Atendimento (Squad 3)Parâmetros de Rota (Path Parameters)ParâmetroTipoObrigatório?Descrição / Exemplo:os_idStringSimID da Ordem de Serviço iniciado por zero (Ex: "089").Corpo da Requisição (Payload JSON Body)JSON
   "status": "concluido",
   "observacoes": "Banho e tosa concluídos sem intercorrências no horário previsto."
-}
-Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
+
+Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
+```json
+{
   "sucesso": true,
   "mensagem": "Ordem de serviço concluída com sucesso.",
   "ordem_servico": {
