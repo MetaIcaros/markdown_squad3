@@ -178,7 +178,23 @@ HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Ate
   "erro": "Acesso negado: apenas atendentes da filial correspondente podem concluir Ordens de Serviço."
 }
 ```
-🔵 ROTA 3: Exportar Agendamentos Concluídos (Para Gestão/Relatórios)Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista consolidada de todas as Ordens de Serviço que atingiram o status concluido. Permite filtros opcionais por período de datas e filial para fins de fechamento de caixa, faturamento e controle de estoque de insumos.Método HTTP: GETEnd-point: /api/agendamentos/concluidosConsumidor: Squad 2 — Gestão e Relatórios (Guardiã: Beatriz / Bia)Parâmetros de Entrada (Query Parameters)CampoTipoObrigatório?Descrição / Valores Permitidosunidade_idIntegerNãoFiltra o relatório por uma filial específica (1, 2 ou 3). Se omitido, retorna os dados consolidados de todas as filiais.data_inicioString (DD-MM-AAAA)NãoData inicial do período de apuração financeira (Ex: 01-11-2026).data_fimString (DD-MM-AAAA)NãoData final do período de apuração financeira (Ex: 05-11-2026).Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
+### 🔵 ROTA 3: Exportar Agendamentos Concluídos (Para Gestão/Relatórios)
+Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista consolidada de todas as Ordens de Serviço que atingiram o status `concluido`. Permite filtros opcionais por período de datas e filial para fins de fechamento de caixa, faturamento e controle de estoque de insumos.
+
+- **Método HTTP:** `GET`
+- **End-point:** `/api/agendamentos/concluidos`
+- **Consumidor:** Squad 2 — Gestão e Relatórios (Guardiã: Beatriz / Bia)
+
+#### Parâmetros de Entrada (Query Parameters)
+| Campo | Tipo | Obrigatório? | Descrição / Valores Permitidos |
+| :--- | :--- | :--- | :--- |
+| `unidade_id` | Integer | Não | Filtra o relatório por uma filial específica (`1`, `2` ou `3`). Se omitido, retorna os dados consolidados de todas as filiais. |
+| `data_inicio` | String (DD-MM-AAAA) | Não | Data inicial do período de apuração financeira (Ex: `01-11-2026`). |
+| `data_fim` | String (DD-MM-AAAA) | Não | Data final do período de apuração financeira (Ex: `05-11-2026`). |
+
+#### Exemplo de Resposta de Sucesso (`HTTP 200 OK`)
+```json
+{
   "sucesso": true,
   "total_registros": 2,
   "filtro_aplicado": {
@@ -206,11 +222,21 @@ HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Ate
     }
   ]
 }
-Tratamento de Erros RetornadosHTTP 400 Bad Request: Parâmetros de data enviados em formato inválido diferente de DD-MM-AAAA ou intervalo inconsistente (data_inicio posterior a data_fim).JSON{
+```
+Tratamento de Erros Retornados
+HTTP 400 Bad Request: Parâmetros de data enviados em formato inválido diferente de DD-MM-AAAA ou intervalo inconsistente (data_inicio posterior a data_fim).
+
+```json
+{
   "sucesso": false,
   "erro": "Parâmetros de data inválidos. Utilize estritamente o formato DD-MM-AAAA."
 }
-HTTP 500 Internal Server Error: Falha crítica na consulta ou na consolidação dos dados junto ao banco de dados SQLite do Squad 3.JSON{
+```
+HTTP 500 Internal Server Error: Falha crítica na consulta ou na consolidação dos dados junto ao banco de dados SQLite do Squad 3.
+
+```json
+{
   "sucesso": false,
   "erro": "Erro interno ao consolidar a massa de Ordens de Serviço concluídas para exportação."
 }
+```
