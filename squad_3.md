@@ -131,7 +131,9 @@ Permite ao **Atendente** alterar o status da Ordem de Serviço (`os_id`) para co
   "status": "concluido",
   "observacoes": "Banho e tosa concluídos sem intercorrências no horário previsto."
 }
-Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
+Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
+
+
   "sucesso": true,
   "mensagem": "Ordem de serviço concluída com sucesso.",
   "ordem_servico": {
@@ -160,7 +162,7 @@ Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
       "perfil": "Banhista - Tosador"
     }
   }
-}
+
 
 Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.JSON
 {
