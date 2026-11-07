@@ -111,6 +111,7 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
     }
 }
 
+```json
 ---
 
 ### 🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de Serviço
