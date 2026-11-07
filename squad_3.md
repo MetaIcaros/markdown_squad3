@@ -130,8 +130,10 @@ Permite ao **Atendente** alterar o status da Ordem de Serviço (`os_id`) para co
   "status": "concluido",
   "observacoes": "Banho e tosa concluídos sem intercorrências no horário previsto."
 }
-
-Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
+```
+Exemplo de Resposta de Sucesso (HTTP 200 OK)
+```json
+{    
   "sucesso": true,
   "mensagem": "Ordem de serviço concluída com sucesso.",
   "ordem_servico": {
@@ -161,11 +163,17 @@ Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
     }
   }
 }
-Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.JSON{
+```
+Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.
+```json
+{
   "sucesso": false,
   "erro": "A OS nº 089 já se encontra concluída ou cancelada."
 }
-HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Atendente ou em filial incorreta).JSON{
+```
+HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Atendente ou em filial incorreta).
+```json
+{
   "sucesso": false,
   "erro": "Acesso negado: apenas atendentes da filial correspondente podem concluir Ordens de Serviço."
 }
