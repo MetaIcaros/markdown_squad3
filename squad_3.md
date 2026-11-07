@@ -77,7 +77,7 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
   "unidade_id": 2,
   "data_consulta": "05-11-2026",
   "total": 1,
-  "dados":
+  "dados": [
     {
       "cliente": {
         "id": 2012,
@@ -109,32 +109,13 @@ Permite ao **Atendente** consultar a lista de agendamentos e Ordens de Serviço 
         "perfil": "Atendente"
       }
     }
+  ]
 }
-
-```json
----
-
-### 🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de Serviço
-Permite ao **Atendente** alterar o status da Ordem de Serviço (`os_id`) para concluído ao finalizar o serviço na filial.
-
-- **Método HTTP:** `PUT` (ou `PATCH`)
-- **End-point:** `/api/agendamentos/:os_id/concluir`
-- **Consumidor:** Interface de Atendimento (Squad 3)
-
-#### Parâmetros de Rota (Path Parameters)
-| Parâmetro | Tipo | Obrigatório? | Descrição / Exemplo |
-| :--- | :--- | :--- | :--- |
-| `:os_id` | String | **Sim** | ID da Ordem de Serviço iniciado por zero (Ex: `"089"`). |
-
-#### Corpo da Requisição (Payload JSON Body)
-
-{
+🔵 ROTA 2: Registrar Conclusão de Atendimento / Ordem de ServiçoPermite ao Atendente alterar o status da Ordem de Serviço (os_id) para concluído ao finalizar o serviço na filial.Método HTTP: PUT (ou PATCH)End-point: /api/agendamentos/:os_id/concluirConsumidor: Interface de Atendimento (Squad 3)Parâmetros de Rota (Path Parameters)ParâmetroTipoObrigatório?Descrição / Exemplo:os_idStringSimID da Ordem de Serviço iniciado por zero (Ex: "089").Corpo da Requisição (Payload JSON Body)JSON{
   "status": "concluido",
   "observacoes": "Banho e tosa concluídos sem intercorrências no horário previsto."
 }
-Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
-
-
+Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
   "sucesso": true,
   "mensagem": "Ordem de serviço concluída com sucesso.",
   "ordem_servico": {
@@ -163,32 +144,23 @@ Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
       "perfil": "Banhista - Tosador"
     }
   }
-
-
-Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.JSON
-{
+}
+Tratamento de Erros RetornadosHTTP 400 Bad Request: Ordem de serviço inválida ou transição de status não permitida.JSON{
   "sucesso": false,
   "erro": "A OS nº 089 já se encontra concluída ou cancelada."
 }
-HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Atendente ou em filial incorreta).JSON
-{
+HTTP 403 Forbidden: Violação da RN-09 ou RN-04 (Usuário sem permissão de Atendente ou em filial incorreta).JSON{
   "sucesso": false,
   "erro": "Acesso negado: apenas atendentes da filial correspondente podem concluir Ordens de Serviço."
 }
-
----
-
-🔵 ROTA 3: Exportar Agendamentos Concluídos (Para Gestão/Relatórios)Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista consolidada de todas as Ordens de Serviço que atingiram o status concluido. Permite filtros opcionais por período de datas e filial para fins de fechamento de caixa, faturamento e controle de estoque de insumos.Método HTTP: GETEnd-point: /api/agendamentos/concluidosConsumidor: Squad 2 — Gestão e Relatórios (Guardiã: Beatriz / Bia)Parâmetros de Entrada (Query Parameters)CampoTipoObrigatório?Descrição / Valores Permitidosunidade_idIntegerNãoFiltra o relatório por uma filial específica (1, 2 ou 3). Se omitido, retorna os dados consolidados de todas as filiais.data_inicioString (DD-MM-AAAA)NãoData inicial do período de apuração financeira (Ex: 01-11-2026).data_fimString (DD-MM-AAAA)NãoData final do período de apuração financeira (Ex: 05-11-2026).
-
-Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
-{
+🔵 ROTA 3: Exportar Agendamentos Concluídos (Para Gestão/Relatórios)Disponibiliza massivamente ao Squad 2 (Módulo de Gestão e Relatórios) a lista consolidada de todas as Ordens de Serviço que atingiram o status concluido. Permite filtros opcionais por período de datas e filial para fins de fechamento de caixa, faturamento e controle de estoque de insumos.Método HTTP: GETEnd-point: /api/agendamentos/concluidosConsumidor: Squad 2 — Gestão e Relatórios (Guardiã: Beatriz / Bia)Parâmetros de Entrada (Query Parameters)CampoTipoObrigatório?Descrição / Valores Permitidosunidade_idIntegerNãoFiltra o relatório por uma filial específica (1, 2 ou 3). Se omitido, retorna os dados consolidados de todas as filiais.data_inicioString (DD-MM-AAAA)NãoData inicial do período de apuração financeira (Ex: 01-11-2026).data_fimString (DD-MM-AAAA)NãoData final do período de apuração financeira (Ex: 05-11-2026).Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON{
   "sucesso": true,
   "total_registros": 2,
   "filtro_aplicado": {
     "unidade_id": null,
     "periodo": "01-11-2026 a 05-11-2026"
   },
-  "dados": 
+  "dados": [
     {
       "cliente_id": 2012,
       "os_id": "089",
@@ -207,15 +179,13 @@ Exemplo de Resposta de Sucesso (HTTP 200 OK)JSON
       "servico_id": 104,
       "preco_praticado": 150.00
     }
-  
+  ]
 }
-Tratamento de Erros RetornadosHTTP 400 Bad Request: Parâmetros de data enviados em formato inválido diferente de DD-MM-AAAA ou intervalo inconsistente (data_inicio posterior a data_fim).JSON
-{
+Tratamento de Erros RetornadosHTTP 400 Bad Request: Parâmetros de data enviados em formato inválido diferente de DD-MM-AAAA ou intervalo inconsistente (data_inicio posterior a data_fim).JSON{
   "sucesso": false,
   "erro": "Parâmetros de data inválidos. Utilize estritamente o formato DD-MM-AAAA."
 }
-HTTP 500 Internal Server Error: Falha crítica na consulta ou na consolidação dos dados junto ao banco de dados SQLite do Squad 3.JSON
-{
+HTTP 500 Internal Server Error: Falha crítica na consulta ou na consolidação dos dados junto ao banco de dados SQLite do Squad 3.JSON{
   "sucesso": false,
   "erro": "Erro interno ao consolidar a massa de Ordens de Serviço concluídas para exportação."
 }
